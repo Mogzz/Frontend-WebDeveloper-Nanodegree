@@ -1,0 +1,39 @@
+/* add your CSS here */
+
+* {
+  box-sizing: border-box;
+}
+
+#card {
+  margin-left: 50px;
+  padding: 0px 25px 10px 25px;
+  border: 1px solid grey;
+  width: 350px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.1);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.1);
+}
+
+span {
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-left : 0;
+  line-height: 1.25;
+}
+
+img {
+  width: 300px;
+}
+
+#card-info {
+  border: 1px solid grey;
+  padding: 5px;
+  width: 300px;
+}
