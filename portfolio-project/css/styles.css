@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+/* HTML ELEMENTS  */
+h1,h2,h4,h5 {
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  color: #2d3c49;
+}
+header {
+  border-bottom: 5px solid #7d97ad;
+}
+
+@media screen and (max-width:500px) {
+  #logo {
+    position: relative;
+    left: 25%;
+  }
+
+}
+
+/* CUSTOM IDS */
+#logo {
+  max-width: 150px;
+}
+#jumbotron {
+  margin-top: 15px;
+}
+
+/* CUSTOM CLASSES */
+.heading {
+  float: right;
+  display: block;
+  text-align: right;
+}
+.sub-heading {
+  font-size: 0.4em;
+  display: block;
+}
+.featured-work {
+  color: #7d97ad;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+}
+.caption {
+text-align: center;
+margin-bottom: 0;
+}
+.link {
+  text-decoration: none;
+  text-align: center;
+}
+.link a {
+  text-decoration: none;
+  color: #02b3e4;
+}
