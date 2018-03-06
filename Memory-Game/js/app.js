@@ -48,12 +48,13 @@ function shuffle(array) {
     return array;
 }
 function displayIcon(card) {
-  card.classList.toggle('open');
   card.classList.toggle('show');
+  card.classList.toggle('open');
   addToOpenList(card);
 }
 function addToOpenList(card) {
 openArray.push(card);
+
 
 if(openArray.length > 1) {
   if(openArray[openArray.length-1].innerHTML === openArray[openArray.length-2].innerHTML) {
@@ -66,12 +67,12 @@ if(openArray.length > 1) {
 function removeCard(array) {
   setTimeout(function(){
     console.log(openArray);
-    openArray[openArray.length-1].classList.remove('open');
-    openArray[openArray.length-1].classList.remove('show');
-    openArray[openArray.length-2].classList.remove('open');
-    openArray[openArray.length-2].classList.remove('show');
+    openArray[openArray.length-1].classList.toggle('open');
+    openArray[openArray.length-1].classList.toggle('show');
+    openArray[openArray.length-2].classList.toggle('open');
+    openArray[openArray.length-2].classList.toggle('show');
     openArray = [];
-  },750);
+  },500);
 }
 
 function matchCards(array) {
@@ -79,6 +80,9 @@ function matchCards(array) {
   openArray[openArray.length-2].classList.add('match');
   openArray = [];
   console.log(openArray);
+}
+function reset() {
+
 }
 /*
  * set up the event listener for a card. If a card is clicked:
