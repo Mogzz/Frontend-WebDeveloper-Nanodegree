@@ -85,6 +85,7 @@ if(openArray.length === 2) {
   if(openArray[openArray.length-1].innerHTML === openArray[openArray.length-2].innerHTML) {
     matchCards();
   } else {
+    //add extra styling here for wrong pairs.. create CSS classes.
     removeCard();
   }
 }
