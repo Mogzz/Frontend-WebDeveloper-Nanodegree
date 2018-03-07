@@ -6,8 +6,11 @@ const list = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 const array = [];
 const moves = document.querySelector('.moves');
+const resetBtn = document.querySelector('.restart');
+const winner = document.querySelector('#winner');
 let moveCounter = 0;
 let openArray = [];
+const matchedCards = [];
 
 /*
  * Display the cards on the page
@@ -17,22 +20,39 @@ let openArray = [];
  */
  for (var i = 0; i < list.length; i++) {
    array.push(list[i]);
-   console.log(array);
  }
+
 shuffle(array);
+
+
 
 for (var i = 0; i < array.length; i++) {
   deck.appendChild(array[i]);
   array[i].addEventListener("click", function(){
     displayIcon(this);
     incrementMoves();
+    createWinnerTitle();
   });
 }
+
+
+for (var i = 0; i < matchedCards.length; i++) {
+  matchedCards[i].removeEventListener("click",function(){
+    console.log('Cant Click This!');
+  });
+}
+
+
 
 function incrementMoves() {
   moveCounter++;
   moves.innerText = moveCounter;
 }
+
+
+
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -47,42 +67,70 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
 function displayIcon(card) {
-  card.classList.toggle('show');
-  card.classList.toggle('open');
-  addToOpenList(card);
+    card.classList.toggle('show');
+    card.classList.toggle('open');
+    addToOpenList(card);
 }
+
+
+
 function addToOpenList(card) {
 openArray.push(card);
 
-
-if(openArray.length > 1) {
+if(openArray.length === 2) {
   if(openArray[openArray.length-1].innerHTML === openArray[openArray.length-2].innerHTML) {
-    matchCards(openArray);
+    matchCards();
   } else {
-    removeCard(openArray);
+    removeCard();
   }
 }
 }
-function removeCard(array) {
+
+
+function removeCard() {
   setTimeout(function(){
-    console.log(openArray);
-    openArray[openArray.length-1].classList.toggle('open');
-    openArray[openArray.length-1].classList.toggle('show');
-    openArray[openArray.length-2].classList.toggle('open');
-    openArray[openArray.length-2].classList.toggle('show');
-    openArray = [];
+    reset();
+
   },500);
 }
 
-function matchCards(array) {
-  openArray[openArray.length-1].classList.add('match');
-  openArray[openArray.length-2].classList.add('match');
-  openArray = [];
-  console.log(openArray);
-}
-function reset() {
 
+
+
+
+function matchCards() {
+  for (var i = 0; i < openArray.length; i++) {
+    openArray[i].classList.add('match');
+    openArray[i].classList.remove('open');
+    openArray[i].classList.remove('show');
+    matchedCards.push(openArray[i]);
+  }
+  openArray.length = 0;
+  console.log(matchedCards);
+
+}
+
+
+
+function reset() {
+  for (var i = 0; i < openArray.length; i++) {
+    openArray[i].classList.toggle('open');
+    openArray[i].classList.toggle('show');
+  }
+  openArray.length = 0;
+}
+
+
+
+function createWinnerTitle() {
+  if(matchedCards.length == 16) {
+    winner.textContent = 'Winner!';
+    matchedCards.length = 0;
+  }
 }
 /*
  * set up the event listener for a card. If a card is clicked:
