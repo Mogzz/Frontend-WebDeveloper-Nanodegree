@@ -82,7 +82,7 @@ function addToOpenList(card) {
 openArray.push(card);
 
 if(openArray.length === 2) {
-  if(openArray[openArray.length-1].innerHTML === openArray[openArray.length-2].innerHTML) {
+  if(openArray[0].innerHTML === openArray[1].innerHTML) {
     matchCards();
   } else {
     //add extra styling here for wrong pairs.. create CSS classes.
