@@ -1,3 +1,11 @@
+/*    To Do list
+  - Fix clicking on same card twice causes it to match
+  - CSS change when selecting wrong card - red background like example
+  - Add animations
+
+  */
+
+
 
 /*
  * Create a list that holds all of your cards
@@ -18,22 +26,32 @@ const matchedCards = [];
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
- for (var i = 0; i < list.length; i++) {
-   array.push(list[i]);
+ function playGame() {
+
+   for (var i = 0; i < list.length; i++) { //take each card selected and push to array
+
+     array.push(list[i]);
+   }
+
+   shuffle(array); //shuffle the order
+
+
+
+   for (var i = 0; i < array.length; i++) {
+     deck.appendChild(array[i]);
+     if(!matchedCards.includes(array[i])) {
+       array[i].addEventListener("click", function(event){
+         displayIcon(this);
+
+         createWinnerTitle();
+       });
+     } else {
+       alert('Choose another');
+     }
+
+
+  }
  }
-
-shuffle(array);
-
-
-
-for (var i = 0; i < array.length; i++) {
-  deck.appendChild(array[i]);
-  array[i].addEventListener("click", function(){
-    displayIcon(this);
-    incrementMoves();
-    createWinnerTitle();
-  });
-}
 
 
 for (var i = 0; i < matchedCards.length; i++) {
@@ -50,9 +68,6 @@ function incrementMoves() {
 }
 
 
-
-
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -64,16 +79,21 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
 
 
 function displayIcon(card) {
-    card.classList.toggle('show');
-    card.classList.toggle('open');
+  if(card == openArray[0]) {
+    alert('NOPE');
+    return;
+  }
+    incrementMoves();
+    card.classList.add('show');
+    card.classList.add('open');
     addToOpenList(card);
+
 }
 
 
@@ -82,7 +102,7 @@ function addToOpenList(card) {
 openArray.push(card);
 
 if(openArray.length === 2) {
-  if(openArray[0].innerHTML === openArray[1].innerHTML) {
+ if(openArray[0].innerHTML === openArray[1].innerHTML) {
     matchCards();
   } else {
     //add extra styling here for wrong pairs.. create CSS classes.
@@ -95,7 +115,6 @@ if(openArray.length === 2) {
 function removeCard() {
   setTimeout(function(){
     reset();
-
   },500);
 }
 
@@ -108,19 +127,23 @@ function matchCards() {
     openArray[i].classList.add('match');
     openArray[i].classList.remove('open');
     openArray[i].classList.remove('show');
-    matchedCards.push(openArray[i]);
+    if(!matchedCards.includes(openArray[i])){
+
+      matchedCards.push(openArray[i]);
+    } else {
+      return;
+    }
   }
   openArray.length = 0;
   console.log(matchedCards);
-
 }
 
 
 
 function reset() {
   for (var i = 0; i < openArray.length; i++) {
-    openArray[i].classList.toggle('open');
-    openArray[i].classList.toggle('show');
+    openArray[i].classList.remove('open');
+    openArray[i].classList.remove('show');
   }
   openArray.length = 0;
 }
@@ -133,6 +156,8 @@ function createWinnerTitle() {
     matchedCards.length = 0;
   }
 }
+
+playGame();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
