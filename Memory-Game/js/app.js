@@ -16,9 +16,30 @@ const array = [];
 const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
 const winner = document.querySelector('#winner');
+const stars = document.querySelector('.stars');
 let moveCounter = 0;
 let openArray = [];
-const matchedCards = [];
+let matchedCards = [];
+const timer = new Date();
+const minutesLabel = document.getElementById("minutes");
+const secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+setInterval(setTime, 1000);
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  let valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
 
 /*
  * Display the cards on the page
@@ -31,12 +52,7 @@ const matchedCards = [];
    for (var i = 0; i < list.length; i++) { //take each card selected and push to array
      array.push(list[i]);
    }
-
-
    shuffle(array); //shuffle the order
-
-
-
    for (var i = 0; i < array.length; i++) {
      deck.appendChild(array[i]);
        array[i].addEventListener("click", function(event){
@@ -46,11 +62,18 @@ const matchedCards = [];
          } else {
            displayIcon(this);
            createWinnerTitle();
+           starRating();
+           resetBtn.addEventListener("click",function(){
+             resetGame();
+           });
          }
        });
-
   }
  }
+
+ resetBtn.addEventListener("click",function(){
+   resetGame();
+ });
 
 
 function incrementMoves() {
@@ -102,14 +125,25 @@ openArray.push(card);
 }
 
 
+
 function removeCard() {
   setTimeout(function(){
     reset();
   },500);
 }
 
-
-
+function resetGame(){
+  array.forEach(function(card){
+    card.classList.remove('match');
+    card.classList.remove('open');
+    card.classList.remove('show');
+  });
+  matchedCards = [];
+  console.log(openArray, matchedCards);
+  moveCounter = 0;
+  totalSeconds = 0;
+  playGame();
+}
 
 
 function matchCards() {
@@ -147,7 +181,17 @@ function createWinnerTitle() {
   }
 }
 
+function starRating() {
+  if(moveCounter === 15) { //after 15 moves remove a star
+    stars.removeChild(stars.childNodes[1]);
+  } else if(moveCounter === 30) { //after 30 remove a star
+    stars.removeChild(stars.childNodes[2]);
+  }
+}
+
 playGame();
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
