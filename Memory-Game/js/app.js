@@ -29,9 +29,9 @@ const matchedCards = [];
  function playGame() {
 
    for (var i = 0; i < list.length; i++) { //take each card selected and push to array
-
      array.push(list[i]);
    }
+
 
    shuffle(array); //shuffle the order
 
@@ -39,27 +39,18 @@ const matchedCards = [];
 
    for (var i = 0; i < array.length; i++) {
      deck.appendChild(array[i]);
-     if(!matchedCards.includes(array[i])) {
        array[i].addEventListener("click", function(event){
-         displayIcon(this);
-
-         createWinnerTitle();
+         if(matchedCards.includes(this)) {
+           alert('Youre a cunt');
+           return;
+         } else {
+           displayIcon(this);
+           createWinnerTitle();
+         }
        });
-     } else {
-       alert('Choose another');
-     }
-
 
   }
  }
-
-
-for (var i = 0; i < matchedCards.length; i++) {
-  matchedCards[i].removeEventListener("click",function(){
-    console.log('Cant Click This!');
-  });
-}
-
 
 
 function incrementMoves() {
@@ -85,7 +76,7 @@ function shuffle(array) {
 
 
 function displayIcon(card) {
-  if(card == openArray[0]) {
+  if(card == openArray[0] || card == openArray[1] ) {
     alert('NOPE');
     return;
   }
@@ -97,18 +88,17 @@ function displayIcon(card) {
 }
 
 
-
 function addToOpenList(card) {
 openArray.push(card);
 
-if(openArray.length === 2) {
- if(openArray[0].innerHTML === openArray[1].innerHTML) {
+  if(openArray.length === 2) {
+    if(openArray[0].innerHTML === openArray[1].innerHTML) {
     matchCards();
-  } else {
+    } else {
     //add extra styling here for wrong pairs.. create CSS classes.
     removeCard();
+    }
   }
-}
 }
 
 
