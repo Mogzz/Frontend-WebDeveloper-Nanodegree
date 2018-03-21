@@ -12,7 +12,7 @@
  */
 const list = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
-const array = [];
+let array = [];
 const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
 const winner = document.querySelector('#winner');
@@ -26,20 +26,6 @@ const secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
 setInterval(setTime, 1000);
 
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-}
-
-function pad(val) {
-  let valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
-}
 
 /*
  * Display the cards on the page
@@ -47,11 +33,13 @@ function pad(val) {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
- function playGame() {
-
+ function createDeck(){
    for (var i = 0; i < list.length; i++) { //take each card selected and push to array
      array.push(list[i]);
    }
+ }
+ function playGame() {
+   createDeck();
    shuffle(array); //shuffle the order
    for (var i = 0; i < array.length; i++) {
      deck.appendChild(array[i]);
@@ -63,18 +51,13 @@ function pad(val) {
            displayIcon(this);
            createWinnerTitle();
            starRating();
-           resetBtn.addEventListener("click",function(){
-             resetGame();
-           });
          }
        });
   }
  }
-
  resetBtn.addEventListener("click",function(){
    resetGame();
  });
-
 
 function incrementMoves() {
   moveCounter++;
@@ -99,7 +82,7 @@ function shuffle(array) {
 
 
 function displayIcon(card) {
-  if(card == openArray[0] || card == openArray[1] ) {
+  if(openArray.includes(card)) {
     alert('NOPE');
     return;
   }
@@ -113,7 +96,7 @@ function displayIcon(card) {
 
 function addToOpenList(card) {
 openArray.push(card);
-
+console.log(openArray[1].children);
   if(openArray.length === 2) {
     if(openArray[0].innerHTML === openArray[1].innerHTML) {
     matchCards();
@@ -128,7 +111,7 @@ openArray.push(card);
 
 function removeCard() {
   setTimeout(function(){
-    reset();
+    resetCard();
   },500);
 }
 
@@ -139,6 +122,8 @@ function resetGame(){
     card.classList.remove('show');
   });
   matchedCards = [];
+  array =[];
+  openArray = [];
   console.log(openArray, matchedCards);
   moveCounter = 0;
   totalSeconds = 0;
@@ -152,7 +137,6 @@ function matchCards() {
     openArray[i].classList.remove('open');
     openArray[i].classList.remove('show');
     if(!matchedCards.includes(openArray[i])){
-
       matchedCards.push(openArray[i]);
     } else {
       return;
@@ -163,8 +147,7 @@ function matchCards() {
 }
 
 
-
-function reset() {
+function resetCard() {
   for (var i = 0; i < openArray.length; i++) {
     openArray[i].classList.remove('open');
     openArray[i].classList.remove('show');
@@ -172,12 +155,26 @@ function reset() {
   openArray.length = 0;
 }
 
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  let valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
+
 
 
 function createWinnerTitle() {
   if(matchedCards.length == 16) {
     winner.textContent = 'Winner!';
-    matchedCards.length = 0;
   }
 }
 
