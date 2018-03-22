@@ -1,5 +1,5 @@
 /*    To Do list
-  - Fix clicking on same card twice causes it to match
+  -
   - CSS change when selecting wrong card - red background like example
   - Add animations
 
@@ -38,21 +38,26 @@ setInterval(setTime, 1000);
      array.push(list[i]);
    }
  }
- function playGame() {
+
+ function play(){
+     if(matchedCards.includes(this)) {
+       alert('Youre a cunt');
+       return;
+     } else {
+       incrementMoves();
+       displayIcon(this);
+       createWinnerTitle();
+       starRating();
+     }
+   }
+
+
+ function init() {
    createDeck();
    shuffle(array); //shuffle the order
    for (var i = 0; i < array.length; i++) {
      deck.appendChild(array[i]);
-       array[i].addEventListener("click", function(event){
-         if(matchedCards.includes(this)) {
-           alert('Youre a cunt');
-           return;
-         } else {
-           displayIcon(this);
-           createWinnerTitle();
-           starRating();
-         }
-       });
+       array[i].addEventListener("click", play,true);
   }
  }
  resetBtn.addEventListener("click",function(){
@@ -86,7 +91,6 @@ function displayIcon(card) {
     alert('NOPE');
     return;
   }
-    incrementMoves();
     card.classList.add('show');
     card.classList.add('open');
     addToOpenList(card);
@@ -96,38 +100,57 @@ function displayIcon(card) {
 
 function addToOpenList(card) {
 openArray.push(card);
-console.log(openArray[1].children);
   if(openArray.length === 2) {
     if(openArray[0].innerHTML === openArray[1].innerHTML) {
     matchCards();
     } else {
     //add extra styling here for wrong pairs.. create CSS classes.
-    removeCard();
+    removeCard(card);
     }
   }
 }
 
 
 
-function removeCard() {
+function removeCard(card) {
   setTimeout(function(){
     resetCard();
   },500);
 }
 
 function resetGame(){
+  let starList = document.querySelectorAll('.fa-star');
   array.forEach(function(card){
+    card.removeEventListener("click",play,true)
     card.classList.remove('match');
     card.classList.remove('open');
     card.classList.remove('show');
   });
-  matchedCards = [];
-  array =[];
-  openArray = [];
+  matchedCards = [], array =[],openArray = [], moveCounter = 0, moves.innerText = moveCounter,totalSeconds = 0;
+  //reset stars
+  if(starList.length == 2) {
+    addStar();
+  } else if(starList.length == 1) {
+    for (var i = 0; i < 2; i++) {
+      addStar();
+    }
+  }
+  console.log(starList.length);
+  init();
   console.log(openArray, matchedCards);
-  moveCounter = 0;
-  totalSeconds = 0;
-  playGame();
+}
+
+function addStar() {
+
+  let li = document.createElement("li");
+  li.style.listStyle ="none";
+  li.style.display = "inline-block";
+  let icon = document.createElement("i");
+  icon.classList.add('fa');
+  icon.classList.add('fa-star');
+  li.appendChild(icon);
+  let star = stars.appendChild(li);
+
 }
 
 
@@ -186,7 +209,7 @@ function starRating() {
   }
 }
 
-playGame();
+init();
 
 
 /*
