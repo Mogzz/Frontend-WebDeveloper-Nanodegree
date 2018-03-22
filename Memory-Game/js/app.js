@@ -2,7 +2,7 @@
   -
   - CSS change when selecting wrong card - red background like example
   - Add animations
-
+  - fix spacing on stars when adding new stars on reset
   */
 
 
@@ -17,6 +17,8 @@ const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
 const winner = document.querySelector('#winner');
 const stars = document.querySelector('.stars');
+const modal = document.querySelector('.container-modal');
+const body = document.body;
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
@@ -143,13 +145,12 @@ function resetGame(){
 function addStar() {
 
   let li = document.createElement("li");
-  li.style.listStyle ="none";
   li.style.display = "inline-block";
   let icon = document.createElement("i");
   icon.classList.add('fa');
   icon.classList.add('fa-star');
   li.appendChild(icon);
-  let star = stars.appendChild(li);
+  stars.appendChild(li);
 
 }
 
@@ -197,7 +198,13 @@ function pad(val) {
 
 function createWinnerTitle() {
   if(matchedCards.length == 16) {
-    winner.textContent = 'Winner!';
+    winner.style.display = "block";
+    let close = document.querySelector('#close-modal');
+    close.style.display = "block";
+    matchedCards.length = 16;
+    modal.style.height = "100%";
+    close.addEventListener("click",closeNav);
+
   }
 }
 
@@ -207,6 +214,9 @@ function starRating() {
   } else if(moveCounter === 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
   }
+}
+function closeNav() {
+    modal.style.height = "0%";
 }
 
 init();
