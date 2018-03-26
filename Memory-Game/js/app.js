@@ -17,7 +17,7 @@ const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
 const winner = document.querySelector('#winner');
 const stars = document.querySelector('.stars');
-const modal = document.querySelector('.container-modal');
+const modal = document.querySelector('.modal');
 const body = document.body;
 let moveCounter = 0;
 let openArray = [];
@@ -207,6 +207,15 @@ function createWinnerTitle() {
 
   }
 }
+const win = document.querySelector('#win');
+win.addEventListener("click",function(){
+  winner.style.display = "block";
+  let close = document.querySelector('#close-modal');
+  close.style.display = "block";
+  matchedCards.length = 16;
+  modal.style.height = "100%";
+  close.addEventListener("click",closeNav);
+});
 
 function starRating() {
   if(moveCounter === 15) { //after 15 moves remove a star

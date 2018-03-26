@@ -110,7 +110,7 @@ h1 {
 }
 
 /* MODAL STYLES  */
-.container-modal {
+.modal {
   height: 0;
   width: 100%;
   position: fixed; /* Stay in place */
@@ -123,6 +123,14 @@ h1 {
   transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
   font-size: 1.4em;
   color:white;
+}
+.modal-container {
+  width: 500px;
+  margin:0 auto;
+}
+.modal-container h3 {
+  text-align: center;
+  vertical-align: middle;
 }
 
 #close-modal {
