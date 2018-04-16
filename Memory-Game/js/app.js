@@ -140,7 +140,7 @@ function resetGame(){ //function used to reset the game
   //console.log(openArray, matchedCards);
 }
 
-function addStar() {
+function addStar() { //add a star after reset
 
   let li = document.createElement("li");
   li.style.display = "inline-block";
@@ -153,7 +153,7 @@ function addStar() {
 }
 
 
-function matchCards() {
+function matchCards() { //match the cards and push to the array
   for (var i = 0; i < openArray.length; i++) {
     openArray[i].classList.add('match');
     openArray[i].classList.remove('open');
@@ -169,21 +169,21 @@ function matchCards() {
 }
 
 
-function resetCard() {
+function resetCard() { //reset the card to original state
   for (var i = 0; i < openArray.length; i++) {
     openArray[i].classList.remove('open');
     openArray[i].classList.remove('show');
   }
-  openArray.length = 0;
+  openArray.length = 0; //clear array
 }
 
-function setTime() {
+function setTime() { //function used for timer
   ++totalSeconds;
   secondsLabel.innerHTML = pad(totalSeconds % 60);
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }
 
-function pad(val) {
+function pad(val) { //timer function
   let valString = val + "";
   if (valString.length < 2) {
     return "0" + valString;
@@ -194,14 +194,13 @@ function pad(val) {
 
 
 
-function createWinnerTitle() {
+function createWinnerTitle() { //create the modal on win
   if(matchedCards.length == 16) {
     winner.style.display = "block";
     let close = document.querySelector('#close-modal');
     close.style.display = "block";
     matchedCards.length = 16;
     modal.style.height = "100%";
-    document.addEventListener("click",closeModal);
 
   }
 }
@@ -215,18 +214,18 @@ win.addEventListener("click",function(){
   modal.style.height = "100%";
 });
 
-function starRating() {
+function starRating() { //scoring logic
   if(moveCounter === 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
   } else if(moveCounter === 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
   }
 }
-function closeModal() {
+function closeModal() { //function passed to close click event
     modal.style.height = "0%";
 }
 
-init();
+init(); //initialize the game
 
 
 /*
