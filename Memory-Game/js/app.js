@@ -85,9 +85,9 @@ function shuffle(array) {
 }
 
 
-
+// function used to display each icon on click
 function displayIcon(card) {
-  if(openArray.includes(card)) {
+  if(openArray.includes(card)) {//check if card if already shown
     alert('Choose another Card!');
     return;
   }
@@ -98,7 +98,7 @@ function displayIcon(card) {
 }
 
 
-function addToOpenList(card) {
+function addToOpenList(card) { //function used to add cards to the open array, if both the same..match
 openArray.push(card);
   if(openArray.length === 2) {
     if(openArray[0].innerHTML === openArray[1].innerHTML) {
@@ -112,13 +112,13 @@ openArray.push(card);
 
 
 
-function removeCard(card) {
+function removeCard(card) { //removes the cards after a brief timeout
   setTimeout(function(){
     resetCard();
   },500);
 }
 
-function resetGame(){
+function resetGame(){ //function used to reset the game
   let starList = document.querySelectorAll('.fa-star');
   array.forEach(function(card){
     card.removeEventListener("click",play,true)
@@ -135,9 +135,9 @@ function resetGame(){
       addStar();
     }
   }
-  console.log(starList.length);
+  //console.log(starList.length);
   init();
-  console.log(openArray, matchedCards);
+  //console.log(openArray, matchedCards);
 }
 
 function addStar() {
@@ -223,7 +223,6 @@ function starRating() {
   }
 }
 function closeModal() {
-
     modal.style.height = "0%";
 }
 
