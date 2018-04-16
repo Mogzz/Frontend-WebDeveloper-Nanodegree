@@ -7,9 +7,7 @@
 
 
 
-/*
- * Create a list that holds all of your cards
- */
+/* CONST / Vars */
 const list = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 let array = [];
@@ -43,7 +41,7 @@ setInterval(setTime, 1000);
 
  function play(){
      if(matchedCards.includes(this)) {
-       alert('Youre a cunt');
+       alert('Choose another Card');
        return;
      } else {
        incrementMoves();
@@ -53,12 +51,12 @@ setInterval(setTime, 1000);
      }
    }
 
-
+ //This function initializes the game
  function init() {
    createDeck();
    shuffle(array); //shuffle the order
    for (var i = 0; i < array.length; i++) {
-     deck.appendChild(array[i]);
+     deck.appendChild(array[i]); //add a click event to each card
        array[i].addEventListener("click", play,true);
   }
  }
@@ -90,7 +88,7 @@ function shuffle(array) {
 
 function displayIcon(card) {
   if(openArray.includes(card)) {
-    alert('NOPE');
+    alert('Choose another Card!');
     return;
   }
     card.classList.add('show');
@@ -203,10 +201,11 @@ function createWinnerTitle() {
     close.style.display = "block";
     matchedCards.length = 16;
     modal.style.height = "100%";
-    close.addEventListener("click",closeNav);
+    document.addEventListener("click",closeModal);
 
   }
 }
+
 const win = document.querySelector('#win');
 win.addEventListener("click",function(){
   winner.style.display = "block";
@@ -214,17 +213,17 @@ win.addEventListener("click",function(){
   close.style.display = "block";
   matchedCards.length = 16;
   modal.style.height = "100%";
-  close.addEventListener("click",closeNav);
 });
 
 function starRating() {
-  if(moveCounter === 15) { //after 15 moves remove a star
+  if(moveCounter === 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
   } else if(moveCounter === 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
   }
 }
-function closeNav() {
+function closeModal() {
+
     modal.style.height = "0%";
 }
 
