@@ -18,12 +18,13 @@ const stars = document.querySelector('.stars');
 const modal = document.querySelector('.modal');
 const score = document.querySelector('#score');
 const playAgain = document.querySelector('#playAgain');
+const winnerMins = document.querySelector('.winnerMins');
 const body = document.body;
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
 const timer = new Date();
-const minutesLabel = document.getElementById("minutes");
+const minutesLabel = document.querySelector(".minutes");
 const secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
 setInterval(setTime, 1000);
@@ -212,6 +213,7 @@ const win = document.querySelector('#win');
 win.addEventListener("click",function(){
   winner.style.display = "block";
   score.innerText = moveCounter;
+  winnerMins.innerText = minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
   let close = document.querySelector('#close-modal');
   close.addEventListener('click',function(){
     modal.style.height = "0%";

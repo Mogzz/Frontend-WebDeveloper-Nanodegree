@@ -122,6 +122,7 @@ h1 {
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
   font-size: 1.4em;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   color:white;
 }
@@ -131,9 +132,10 @@ h1 {
   top: 20%;
   margin: 0 auto;
 }
-.modal-container h3 {
+.modal-container h3, h4 {
   text-align: center;
   vertical-align: middle;
+  font-weight: 200;
 }
 
 #close-modal {
