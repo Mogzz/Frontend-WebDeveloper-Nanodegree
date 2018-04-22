@@ -13,9 +13,11 @@ const deck = document.querySelector('.deck');
 let array = [];
 const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
-const winner = document.querySelector('#winner');
+const winner = document.querySelector('.winner');
 const stars = document.querySelector('.stars');
 const modal = document.querySelector('.modal');
+const score = document.querySelector('#score');
+const playAgain = document.querySelector('#playAgain');
 const body = document.body;
 let moveCounter = 0;
 let openArray = [];
@@ -198,6 +200,7 @@ function createWinnerTitle() { //create the modal on win
   if(matchedCards.length == 16) {
     winner.style.display = "block";
     let close = document.querySelector('#close-modal');
+    close.addEventListener('click',closeModal);
     close.style.display = "block";
     matchedCards.length = 16;
     modal.style.height = "100%";
@@ -208,7 +211,15 @@ function createWinnerTitle() { //create the modal on win
 const win = document.querySelector('#win');
 win.addEventListener("click",function(){
   winner.style.display = "block";
+  score.innerText = moveCounter;
   let close = document.querySelector('#close-modal');
+  close.addEventListener('click',function(){
+    modal.style.height = "0%";
+  });
+  playAgain.addEventListener('click',function(){
+    closeModal();
+    resetGame();
+  })
   close.style.display = "block";
   matchedCards.length = 16;
   modal.style.height = "100%";
