@@ -1,8 +1,7 @@
-/*    To Do list
-  -
-  - CSS change when selecting wrong card - red background like example
-  - Add animations
-  - fix spacing on stars when adding new stars on reset
+/*    Memory game
+
+    by - Morgan Parry
+
   */
 
 
@@ -198,35 +197,24 @@ function pad(val) { //timer function
 
 
 function createWinnerTitle() { //create the modal on win
-  if(matchedCards.length == 16) {
-    winner.style.display = "block";
-    let close = document.querySelector('#close-modal');
-    close.addEventListener('click',closeModal);
-    close.style.display = "block";
-    matchedCards.length = 16;
-    modal.style.height = "100%";
+  if(matchedCards.length == 16) { //when 16 cards matched display the winner modal
+      winner.style.display = "block";
+      score.innerText = moveCounter;
+      winnerMins.innerText = minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+      let close = document.querySelector('#close-modal');
+      close.addEventListener('click',function(){ //add event to close modal
+        modal.style.height = "0%";
+      });
+      playAgain.addEventListener('click',function(){
+        closeModal();
+        resetGame();
+      });
+      close.style.display = "block";
+      matchedCards.length = 16;
+      modal.style.height = "100%";
 
   }
 }
-
-const win = document.querySelector('#win');
-win.addEventListener("click",function(){
-  winner.style.display = "block";
-  score.innerText = moveCounter;
-  winnerMins.innerText = minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-  let close = document.querySelector('#close-modal');
-  close.addEventListener('click',function(){
-    modal.style.height = "0%";
-  });
-  playAgain.addEventListener('click',function(){
-    closeModal();
-    resetGame();
-  })
-  close.style.display = "block";
-  matchedCards.length = 16;
-  modal.style.height = "100%";
-});
-
 function starRating() { //scoring logic
   if(moveCounter === 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
@@ -239,15 +227,3 @@ function closeModal() { //function passed to close click event
 }
 
 init(); //initialize the game
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
