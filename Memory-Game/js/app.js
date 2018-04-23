@@ -66,6 +66,7 @@ setInterval(setTime, 1000);
  }
  resetBtn.addEventListener("click",function(){
    resetGame();
+  
  });
 
 function incrementMoves() {
@@ -132,9 +133,9 @@ function resetGame(){ //function used to reset the game
   });
   matchedCards = [], array =[],openArray = [], moveCounter = 0, moves.innerText = moveCounter,totalSeconds = 0;
   //reset stars
-  if(starList.length == 2) {
+  if(starList.length === 2) {
     addStar();
-  } else if(starList.length == 1) {
+  } else if(starList.length === 1) {
     for (var i = 0; i < 2; i++) {
       addStar();
     }
@@ -222,10 +223,10 @@ function createWinnerTitle() { //create the modal on win
 function starRating() { //scoring logic
   if(moveCounter === 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
-    starsModal.removeChild(stars.childNodes[1]);
+    starsModal.removeChild(starsModal.childNodes[1]);
   } else if(moveCounter === 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
-    starsModal.removeChild(stars.childNodes[2]);
+    starsModal.removeChild(starsModal.childNodes[2]);
   }
 }
 function closeModal() { //function passed to close click event
