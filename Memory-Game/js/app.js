@@ -20,6 +20,7 @@ const playAgain = document.querySelector('#playAgain');
 const winnerMins = document.querySelector('.winnerMins');
 const body = document.body;
 const winnerSecs = document.querySelector('.winnerSecs');
+const starsModal = document.querySelector('.stars-modal');
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
@@ -212,6 +213,7 @@ function createWinnerTitle() { //create the modal on win
         resetGame();
       });
       close.style.display = "block";
+      starRating();
       matchedCards.length = 16;
       modal.style.height = "100%";
 
@@ -220,8 +222,10 @@ function createWinnerTitle() { //create the modal on win
 function starRating() { //scoring logic
   if(moveCounter === 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
+    starsModal.removeChild(stars.childNodes[1]);
   } else if(moveCounter === 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
+    starsModal.removeChild(stars.childNodes[2]);
   }
 }
 function closeModal() { //function passed to close click event
