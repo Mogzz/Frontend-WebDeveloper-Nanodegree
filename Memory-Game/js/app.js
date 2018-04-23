@@ -19,6 +19,7 @@ const score = document.querySelector('#score');
 const playAgain = document.querySelector('#playAgain');
 const winnerMins = document.querySelector('.winnerMins');
 const body = document.body;
+const winnerSecs = document.querySelector('.winnerSecs');
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
@@ -200,7 +201,8 @@ function createWinnerTitle() { //create the modal on win
   if(matchedCards.length == 16) { //when 16 cards matched display the winner modal
       winner.style.display = "block";
       score.innerText = moveCounter;
-      winnerMins.innerText = minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+      winnerMins.innerText = pad(parseInt(totalSeconds / 60));
+      winnerSecs.innerText = pad(totalSeconds % 60);
       let close = document.querySelector('#close-modal');
       close.addEventListener('click',function(){ //add event to close modal
         modal.style.height = "0%";
