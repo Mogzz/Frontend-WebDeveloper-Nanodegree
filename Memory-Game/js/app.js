@@ -54,7 +54,9 @@ setInterval(setTime, 1000);
        starRating();
      }
    }
-
+   resetBtn.addEventListener("click",function(){
+     resetGame();
+   });
  //This function initializes the game
  function init() {
    createDeck();
@@ -62,12 +64,10 @@ setInterval(setTime, 1000);
    for (var i = 0; i < array.length; i++) {
      deck.appendChild(array[i]); //add a click event to each card
        array[i].addEventListener("click", play,true);
+
   }
  }
- resetBtn.addEventListener("click",function(){
-   resetGame();
-  
- });
+
 
 function incrementMoves() {
   moveCounter++;
@@ -124,7 +124,6 @@ function removeCard(card) { //removes the cards after a brief timeout
 }
 
 function resetGame(){ //function used to reset the game
-  let starList = document.querySelectorAll('.fa-star');
   array.forEach(function(card){
     card.removeEventListener("click",play,true)
     card.classList.remove('match');
@@ -133,28 +132,27 @@ function resetGame(){ //function used to reset the game
   });
   matchedCards = [], array =[],openArray = [], moveCounter = 0, moves.innerText = moveCounter,totalSeconds = 0;
   //reset stars
-  if(starList.length === 2) {
-    addStar();
-  } else if(starList.length === 1) {
-    for (var i = 0; i < 2; i++) {
-      addStar();
-    }
-  }
+  addStar();
+  starRating();
   //console.log(starList.length);
   init();
   //console.log(openArray, matchedCards);
 }
 
 function addStar() { //add a star after reset
-
+  let starList = document.querySelectorAll('.fa-star');
   let li = document.createElement("li");
   li.style.display = "inline-block";
   let icon = document.createElement("i");
   icon.classList.add('fa');
   icon.classList.add('fa-star');
   li.appendChild(icon);
-  stars.appendChild(li);
-
+  if(starList.length == 2) {
+      stars.appendChild(li);
+  } else if(starList.length < 2) {
+      stars.appendChild(li);
+      stars.appendChild(li);
+  }
 }
 
 
