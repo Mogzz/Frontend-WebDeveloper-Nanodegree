@@ -50,8 +50,8 @@ setInterval(setTime, 1000);
      } else {
        incrementMoves();
        displayIcon(this);
-       createWinnerTitle();
        starRating();
+       createWinnerTitle();
      }
    }
    resetBtn.addEventListener("click",function(){
@@ -130,24 +130,24 @@ function resetGame(){ //function used to reset the game
     card.classList.remove('open');
     card.classList.remove('show');
   });
+  addStar();
   matchedCards = [], array =[],openArray = [], moveCounter = 0, moves.innerText = moveCounter,totalSeconds = 0;
   //reset stars
-  addStar();
-  starRating();
+  // addStar();
   //console.log(starList.length);
   init();
   //console.log(openArray, matchedCards);
 }
 
 function addStar() { //add a star after reset
-  let starList = document.querySelectorAll('.fa-star');
+  let starList = document.querySelectorAll('.score-panel .fa-star');
   let li = document.createElement("li");
   li.style.display = "inline-block";
   let icon = document.createElement("i");
   icon.classList.add('fa');
   icon.classList.add('fa-star');
   li.appendChild(icon);
-  if(starList.length == 2) {
+  if(starList.length === 2) {
       stars.appendChild(li);
   } else if(starList.length < 2) {
       stars.appendChild(li);
