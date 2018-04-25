@@ -19,6 +19,7 @@ const score = document.querySelector('#score');
 const playAgain = document.querySelector('#playAgain');
 const winnerMins = document.querySelector('.winnerMins');
 const body = document.body;
+const starsModal = document.querySelector('.stars-modal');
 const winnerSecs = document.querySelector('.winnerSecs');
 let moveCounter = 0;
 let openArray = [];
@@ -140,7 +141,6 @@ function resetGame(){ //function used to reset the game
 
 function addStar() { //add a star after reset
   let starList = document.querySelectorAll('.score-panel .fa-star');
-  let starsModal = document.querySelector('.stars-modal');
   let li = document.createElement("li");
   li.style.display = "inline-block";
   let icon = document.createElement("i");
