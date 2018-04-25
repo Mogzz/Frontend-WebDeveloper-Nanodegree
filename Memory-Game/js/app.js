@@ -20,10 +20,10 @@ const playAgain = document.querySelector('#playAgain');
 const winnerMins = document.querySelector('.winnerMins');
 const body = document.body;
 const winnerSecs = document.querySelector('.winnerSecs');
-const starsModal = document.querySelector('.stars-modal');
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
+let starsModal = document.querySelector('.stars-modal');
 const timer = new Date();
 const minutesLabel = document.querySelector(".minutes");
 const secondsLabel = document.getElementById("seconds");
@@ -148,10 +148,11 @@ function addStar() { //add a star after reset
   icon.classList.add('fa-star');
   li.appendChild(icon);
   if(starList.length === 2) {
-      stars.appendChild(li);
+      stars.innerHTML += li.innerHTML;
   } else if(starList.length < 2) {
-      stars.appendChild(li);
-      stars.appendChild(li);
+      for (var i = 0; i < 2; i++) {
+          stars.innerHTML+= li.innerHTML;
+    }
   }
 }
 
@@ -219,10 +220,11 @@ function createWinnerTitle() { //create the modal on win
   }
 }
 function starRating() { //scoring logic
-  if(moveCounter === 16) { //after 15 moves remove a star
+
+  if(moveCounter == 16) { //after 15 moves remove a star
     stars.removeChild(stars.childNodes[1]);
     starsModal.removeChild(starsModal.childNodes[1]);
-  } else if(moveCounter === 30) { //after 30 remove a star
+  } else if(moveCounter == 30) { //after 30 remove a star
     stars.removeChild(stars.childNodes[2]);
     starsModal.removeChild(starsModal.childNodes[2]);
   }
