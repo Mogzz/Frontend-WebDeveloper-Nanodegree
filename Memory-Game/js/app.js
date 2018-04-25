@@ -23,7 +23,6 @@ const winnerSecs = document.querySelector('.winnerSecs');
 let moveCounter = 0;
 let openArray = [];
 let matchedCards = [];
-let starsModal = document.querySelector('.stars-modal');
 const timer = new Date();
 const minutesLabel = document.querySelector(".minutes");
 const secondsLabel = document.getElementById("seconds");
@@ -141,6 +140,7 @@ function resetGame(){ //function used to reset the game
 
 function addStar() { //add a star after reset
   let starList = document.querySelectorAll('.score-panel .fa-star');
+  let starsModal = document.querySelector('.stars-modal');
   let li = document.createElement("li");
   li.style.display = "inline-block";
   let icon = document.createElement("i");
@@ -149,9 +149,11 @@ function addStar() { //add a star after reset
   li.appendChild(icon);
   if(starList.length === 2) {
       stars.innerHTML += li.innerHTML;
+      starsModal.innerHTML += li.innerHTML;
   } else if(starList.length < 2) {
       for (var i = 0; i < 2; i++) {
           stars.innerHTML+= li.innerHTML;
+          starsModal.innerHTML+= li.innerHTML;
     }
   }
 }
