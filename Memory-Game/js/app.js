@@ -131,6 +131,7 @@ function resetGame(){ //function used to reset the game
     card.classList.remove('show');
   });
   addStar();
+  addStarModal();
   matchedCards = [], array =[],openArray = [], moveCounter = 0, moves.innerText = moveCounter,totalSeconds = 0;
   //reset stars
   // addStar();
@@ -142,22 +143,40 @@ function resetGame(){ //function used to reset the game
 function addStar() { //add a star after reset
   let starList = document.querySelectorAll('.score-panel .fa-star');
   let li = document.createElement("li");
-  let liModal = document.createElement("li");
   li.style.display = "inline-block";
-  liModal.style.display = "inline-block";
-  liModal.style.fontSize = 'inherit';
+  // liModal.style.display = "inline-block";
+  // liModal.style.fontSize = 'inherit';
   let icon = document.createElement("i");
   icon.classList.add('fa');
   icon.classList.add('fa-star');
   li.appendChild(icon);
-  liModal.appendChild(icon);
+  // liModal.appendChild(icon);
   if(starList.length == 2) {
       stars.innerHTML += li.innerHTML;
-      starsModal.innerHTML += liModal.innerHTML;
+      // starsModal.innerHTML += liModal.innerHTML;
   } else if(starList.length < 2) {
       for (var i = 0; i < 2; i++) {
           console.log('One Star');
           stars.innerHTML += li.innerHTML;
+          // starsModal.innerHTML += liModal.innerHTML;
+    }
+  }
+}
+
+function addStarModal(){
+  let starList = document.querySelectorAll('.score-panel .fa-star');
+  let liModal = document.createElement("li");
+  let icon = document.createElement("i");
+  liModal.style.display = "inline-block";
+  liModal.style.fontSize = 'inherit';
+  liModal.appendChild(icon);
+  icon.classList.add('fa');
+  icon.classList.add('fa-star');
+  if(starList.length == 2) {
+      starsModal.innerHTML += liModal.innerHTML;
+  } else if(starList.length < 2) {
+      for (var i = 0; i < 2; i++) {
+          console.log('One Star');
           starsModal.innerHTML += liModal.innerHTML;
     }
   }
@@ -216,8 +235,9 @@ function createWinnerTitle() { //create the modal on win
         modal.style.height = "0%";
       });
       playAgain.addEventListener('click',function(){
-        closeModal();
         resetGame();
+        closeModal();
+
       });
       close.style.display = "block";
       starRating();
