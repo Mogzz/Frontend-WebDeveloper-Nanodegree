@@ -163,7 +163,7 @@ function addStar() { //add a star after reset
   }
 }
 
-function addStarModal(){
+function addStarModal(){ // Add 3 stars to modal when game is reset
   let starList = document.querySelectorAll('.score-panel .fa-star');
   let liModal = document.createElement("li");
   let icon = document.createElement("i");
