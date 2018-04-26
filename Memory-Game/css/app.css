@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
 
 *,
@@ -82,12 +83,20 @@ h1 {
 
 }
 
+.timer label, .timer  {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+span.moves {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /*
  * Styles for the Score Panel
  */
 
 .score-panel {
-    text-align: left;
+
     width: 345px;
     margin-bottom: 10px;
 }
@@ -96,12 +105,12 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-  
 }
 
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+
 }
 
 .score-panel .restart {
