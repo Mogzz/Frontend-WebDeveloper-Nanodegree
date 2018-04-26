@@ -13,7 +13,7 @@ let array = [];
 const moves = document.querySelector('.moves');
 const resetBtn = document.querySelector('.restart');
 const winner = document.querySelector('.winner');
-const stars = document.querySelector('.stars');
+let stars = document.querySelector('.stars');
 const modal = document.querySelector('.modal');
 const score = document.querySelector('#score');
 const playAgain = document.querySelector('#playAgain');
@@ -142,18 +142,23 @@ function resetGame(){ //function used to reset the game
 function addStar() { //add a star after reset
   let starList = document.querySelectorAll('.score-panel .fa-star');
   let li = document.createElement("li");
+  let liModal = document.createElement("li");
   li.style.display = "inline-block";
+  liModal.style.display = "inline-block";
+  liModal.style.fontSize = 'inherit';
   let icon = document.createElement("i");
   icon.classList.add('fa');
   icon.classList.add('fa-star');
   li.appendChild(icon);
-  if(starList.length === 2) {
+  liModal.appendChild(icon);
+  if(starList.length == 2) {
       stars.innerHTML += li.innerHTML;
-      starsModal.innerHTML += li.innerHTML;
+      starsModal.innerHTML += liModal.innerHTML;
   } else if(starList.length < 2) {
       for (var i = 0; i < 2; i++) {
-          stars.innerHTML+= li.innerHTML;
-          starsModal.innerHTML+= li.innerHTML;
+          console.log('One Star');
+          stars.innerHTML += li.innerHTML;
+          starsModal.innerHTML += liModal.innerHTML;
     }
   }
 }

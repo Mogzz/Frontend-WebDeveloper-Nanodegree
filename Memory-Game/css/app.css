@@ -157,9 +157,8 @@ h1 {
 }
 .modal ul {
   list-style:none;
-
+  font-size: 4em;
 }
 .modal li {
   display: inline-block;
-  font-size: 4em;
 }
