@@ -28,7 +28,7 @@ const timer = new Date();
 const minutesLabel = document.querySelector(".minutes");
 const secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
-setInterval(setTime, 1000);
+var c = setInterval(setTime, 1000);
 
 
 /*
@@ -245,6 +245,7 @@ function createWinnerTitle() { //create the modal on win
       starRating();
       matchedCards.length = 16;
       modal.style.height = "100%";
+      clearInterval(c);
 
   }
 }
