@@ -70,7 +70,9 @@ setInterval(setTime, 1000);
 
 
 function incrementMoves() {
-  moveCounter++;
+  if(openArray.length == 1){
+    moveCounter++;
+  }
   moves.innerText = moveCounter;
 }
 
