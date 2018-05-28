@@ -54,7 +54,7 @@ Player.prototype.update = function(key) {
         this.x +=20;
     }
 
-    if(this.y == 20 || this.y == 440 || this.x == -60 || this.x == 460){
+    if(this.y == 0 || this.y == 440 || this.x == -60 || this.x == 460){ //if we reach the end, bottom or sides of frame. Reset
         this.respawn();
     }
 };
