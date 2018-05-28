@@ -14,8 +14,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 3;
-    if(this.x > 450) {
+    this.x += 100*dt;
+    if(this.x > 500) {
         this.respawn();
     }
 };
@@ -24,14 +24,14 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-Enemy.prototype.respawn = function(rand){
-        this.x = Math.floor(Math.random() * 50) - 200;
+Enemy.prototype.respawn = function(rand){ //reset the bugs when they reach other side.
+        this.x = Math.floor(Math.random() * 50) - 200; //randomly assign x and y 
         this.y = Math.floor(Math.random() * 100) + 100;
     
 }
 
 // Now write your own player class
-function Player(){
+function Player(){ //Player contructor with starting position 
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
@@ -58,20 +58,21 @@ Player.prototype.update = function(key) {
         this.respawn();
     }
 };
-Player.prototype.render = function() {
+Player.prototype.render = function() { //render the sprite for the player
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 // a handleInput() method.
-Player.prototype.handleInput = function(key) {
+Player.prototype.handleInput = function(key) { //handle all key presses
     player.update(key);
 }
-Player.prototype.respawn = function(){
+Player.prototype.respawn = function(){ //reset the character at edge of game and when we reach the water
     this.x = 200;
     this.y = 400;
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var enemy = new Enemy();
+var enemy = new Enemy(); 
+//assign starting positions that are offset so no bugs are grouped when reset
 enemy.x = -100;
 enemy.y = 200;
 var enemyTwo = new Enemy();
@@ -85,8 +86,6 @@ var allEnemies = [enemy,enemyTwo,enemyThree];
 var player = new Player();
 
 
-
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -98,5 +97,4 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-    console.log(allowedKeys[e.keyCode]);
 });
