@@ -2,7 +2,8 @@
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.speedArr = [100, 150];
+    this.speedArr = [100, 150, 200, 250];
+    this.hypSpeedArr = [300,350,400];
     this.yArr = [64, 147, 230];
     this.x = 1;
     this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
@@ -10,6 +11,7 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.speed = this.speedArr[Math.floor(Math.random() * this.speedArr.length)];
+    this.hyperSpeed = this.hypSpeedArr[Math.floor(Math.random() * this.hypSpeedArr.length)];
 };
 
 // Update the enemy's position, required method for game
@@ -18,12 +20,16 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.speed*dt;
-    if(this.x > 500) {
-        this.x = -105; //randomly assign x and y 
-        this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
+    if(points < 50){
+        this.x += this.speed*dt;
+    } else {
+        this.x += this.hyperSpeed*dt;
     }
-    // this.checkCollisions();
+    
+    if(this.x > 500) {
+        this.respawn();
+    }
+    
 
 };
 
@@ -35,11 +41,7 @@ Enemy.prototype.respawn = function(rand){ //reset the bugs when they reach other
         this.x = -105; //randomly assign x and y 
         this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
 }
-// Enemy.prototype.checkCollisions = function(){
-//     if ((this.x < player.x + 50 && this.x > player.x + 50) && (this.y == player.y+20 && this.y == player.y+20)) {        
-//         player.respawn();
-//     }
-// }
+
 
 // Now write your own player class
 function Player(){ //Player contructor with starting position 
@@ -66,10 +68,17 @@ Player.prototype.update = function(key) {
         this.x +=20;
     }
 
-    if(this.y == 0 || this.y == 440 || this.x == -60 || this.x == 460){ //if we reach the end, bottom or sides of frame. Reset
-        this.respawn();
+    if(this.y == 440 || this.x == -60 || this.x == 460){ //if we reach the end, bottom or sides of frame. Reset
     }
-
+    if(this.y == 0) {
+        points += 10;
+        score.innerText = points;
+        this.respawn();
+        console.log(points);
+    }
+    if(points == 100) {
+        winnerModal();
+    }
     this.checkCollisions();
 
 
@@ -88,12 +97,18 @@ Player.prototype.respawn = function(){ //reset the character at edge of game and
 Player.prototype.checkCollisions = function(){
 
    for (var i = 0; i < allEnemies.length; i++) {
-       var enemy = allEnemies[i];
-       if ((this.x < enemy.x + 50 && this.x > enemy.x + 50) && (this.y == enemy.y+20 && this.y == enemy.y+20)) {        
+       const enemy = allEnemies[i];
+       if (Math.floor(this.x) == Math.floor(enemy.x) && Math.floor(this.y) == Math.floor(enemy.y)) {        
            this.respawn();
+           if(points >= 20) {
+            points -= 20;
+           } else  {
+            points = 0;
+           }
         console.log('collision!!');
     }
    }
+//    console.log('collision!!');
     
 }
 
@@ -107,8 +122,13 @@ var enemyThree = new Enemy();
 var allEnemies = [enemy,enemyTwo,enemyThree];
 // Place the player object in a variable called player
 var player = new Player();
+var points = 0;
+var score = document.getElementById('score');
+score.innerText = points;
 
+function winnerModal() {
 
+}
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
