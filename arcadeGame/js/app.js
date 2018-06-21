@@ -20,7 +20,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += this.speed*dt;
     if(this.x > 500) {
-        this.respawn();
+        this.x = -105; //randomly assign x and y 
+        this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
     }
     // this.checkCollisions();
 
