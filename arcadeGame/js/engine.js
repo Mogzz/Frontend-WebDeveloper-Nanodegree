@@ -79,10 +79,10 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions.apply(Enemy);
+        checkCollisions.bind(Enemy);
     }
     function checkCollisions(){
-        if (player.x == this.x){
+        if (player.x == this.x && player.y == this.y){
             player.respawn();
         }
     }
