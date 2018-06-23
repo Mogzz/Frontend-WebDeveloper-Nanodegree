@@ -47,6 +47,7 @@ function Player(){ //Player contructor with starting position
 }
 // This class requires an update(), render() and
 Player.prototype.update = function(key) {
+
     if(key == 'up') {
         this.y -= 20;
 
@@ -99,7 +100,7 @@ Player.prototype.checkCollisions = function(){
                 score.innerText = points;
             } else  {
                 points = 0;
-                        
+                score.innerText = points;          
             }
         
             console.log('collision!!');
