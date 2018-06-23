@@ -6,6 +6,8 @@ var Enemy = function() {
     this.hypSpeedArr = [300,350,400];
     this.yArr = [64, 147, 230];
     this.x = 1;
+    this.height = 50;
+    this.width = 50;
     this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -48,6 +50,8 @@ function Player(){ //Player contructor with starting position
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
+    this.height = 101;
+    this.width = 101;
 }
 // This class requires an update(), render() and
 Player.prototype.update = function(key) {
@@ -98,18 +102,20 @@ Player.prototype.checkCollisions = function(){
 
    for (var i = 0; i < allEnemies.length; i++) {
        const enemy = allEnemies[i];
-       if (Math.floor(this.x) == Math.floor(enemy.x) && Math.floor(this.y) == Math.floor(enemy.y)) {        
-           this.respawn();
-           if(points >= 20) {
-            points -= 20;
-           } else  {
-            points = 0;
-           }
-        console.log('collision!!');
-    }
-   }
-//    console.log('collision!!');
-    
+        if (enemy.x < this.x + this.width && enemy.x + enemy.width > this.x && enemy.y < this.y + this.height && enemy.height + enemy.y > this.y) {
+            //moves the player back to it's start position
+            this.respawn();
+            if(points >= 20) {
+                points -= 20;
+                score.innerText = points;
+            } else  {
+                points = 0;
+                        
+            }
+        
+            console.log('collision!!');
+        }
+    } 
 }
 
 // Now instantiate your objects.
