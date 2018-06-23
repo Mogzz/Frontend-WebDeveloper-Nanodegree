@@ -14,12 +14,11 @@ var Enemy = function() {
 
 
 Enemy.prototype.update = function(dt) {
-    if(points < 50){
+    if(easeMode){
         this.x += this.speed*dt;
-    } else {
+    } else if(hardMode) {
         this.x += this.hyperSpeed*dt;
     }
-    
     if(this.x > 500) {
         this.respawn();
     }
@@ -121,10 +120,18 @@ var player = new Player();
 var points = 0;
 var score = document.getElementById('score');
 score.innerText = points;
+var hardMode = false;
+var easyMode = true;
 
+var hardBtn = document.getElementById('hardBtn');
+hardBtn.addEventListener('click',function(){
+    hardMode = true;
+    easyMode = false;
+})
 function winnerModal() {
 
 }
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {

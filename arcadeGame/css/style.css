@@ -1,6 +1,47 @@
+*{
+    box-sizing: border-box;
+}
 body {
     text-align: center;
 }
+.container {
+    width: 70%;
+    /* float: left; */
+    height: 50px;
+    margin: 0 auto;
+    padding: 0px;
+}
+#easy {
+    width: 33.3%;
+    float: left;
+    margin: 0;
+    height: 35px;
+
+}
+#hard {
+    width: 33.3%;
+    float: right;
+    margin: 0;
+    height: 35px;
+
+}
+#score-box {
+    height: 50px;
+    float: left;
+    width: 33.3%;
+    text-align: center; 
+    padding: 5px;
+    margin : 0;
+}
 h1 {
     font-family: 'Shrikhand', cursive;
+    font-size: 50px;
+}
+h3 {
+    font-family: 'Shrikhand', cursive;
+    font-size: 35px;
+}
+h3:hover {
+    cursor: pointer;
+    color: tomato;
 }
