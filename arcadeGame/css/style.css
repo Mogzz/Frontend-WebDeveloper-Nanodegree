@@ -33,6 +33,9 @@ body {
     padding: 5px;
     margin : 0;
 }
+#easyBtn {
+    color: tomato;
+}
 h1 {
     font-family: 'Shrikhand', cursive;
     font-size: 50px;
@@ -44,4 +47,48 @@ h3 {
 h3:hover {
     cursor: pointer;
     color: tomato;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    /* background-color: #fefefe; */
+    margin: 35% auto; /* 15% from the top and centered */
+    padding: 0;
+    /* border: 1px solid #888; */
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#winner {
+    font-size: 6em;
+    color: tomato;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

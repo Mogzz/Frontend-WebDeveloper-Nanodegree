@@ -4,23 +4,23 @@ var Enemy = function() {
     this.hypSpeedArr = [300,350,400];
     this.yArr = [64, 147, 230];
     this.x = 1;
-    this.height = 25;
+    this.height = 25; //set width and height for collision detectiobn
     this.width = 25;
-    this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
-    this.sprite = 'images/enemy-bug.png';
-    this.speed = this.speedArr[Math.floor(Math.random() * this.speedArr.length)];
+    this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)]; //assign random y position from array 
+    this.sprite = 'images/enemy-bug.png'; //default img for enemy
+    this.speed = this.speedArr[Math.floor(Math.random() * this.speedArr.length)];  //create a random speed from speed array
     this.hyperSpeed = this.hypSpeedArr[Math.floor(Math.random() * this.hypSpeedArr.length)];
 };
 
 
 Enemy.prototype.update = function(dt) {
     if(easyMode){
-        this.x += this.speed*dt;
+        this.x += this.speed*dt; //set speed based on difficulty
     } else if(hardMode) {
         this.x += this.hyperSpeed*dt;
     }
     if(this.x > 500) {
-        this.respawn();
+        this.respawn(); //reset off page
     }
     
 
@@ -31,7 +31,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 Enemy.prototype.respawn = function(rand){ //reset the bugs when they reach other side.
-        this.x = -105; //randomly assign x and y 
+        this.x = -105; //randomly assign y
         this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
 }
 
@@ -49,7 +49,6 @@ Player.prototype.update = function(key) {
 
     if(key == 'up') {
         this.y -= 20;
-
     }
     if(key == 'down'){
         this.y += 20;
@@ -63,16 +62,16 @@ Player.prototype.update = function(key) {
 
     if(this.y == 440 || this.x == -60 || this.x == 460){ //if we reach the end, bottom or sides of frame. Reset
     }
-    if(this.y == 0) {
+    if(this.y == 0) { //add 10 points when we reach the water
         points += 10;
         score.innerText = points;
         this.respawn();
         console.log(points);
     }
-    if(points == 100) {
-        winnerModal();
+    if(points === 100) {
+        winnerModal(); //at 100 points show winner title
     }
-    this.checkCollisions();
+    this.checkCollisions(); //check for collisions each update
 
 
 };
@@ -92,9 +91,8 @@ Player.prototype.checkCollisions = function(){
    for (var i = 0; i < allEnemies.length; i++) {
        const enemy = allEnemies[i];
         if (enemy.x < this.x + this.width && enemy.x + enemy.width > this.x && enemy.y < this.y + this.height && enemy.height + enemy.y > this.y) {
-            //moves the player back to it's start position
-            this.respawn();
-            if(points >= 10) {
+            this.respawn(); // if we collide reset
+            if(points >= 10) { //deduct 10 points 
                 points -= 10;
                 score.innerText = points;
             } else  {
@@ -123,6 +121,8 @@ score.innerText = points;
 var hardMode = false;
 var easyMode = true;
 
+
+/* ---- Difficulty Events ---- */
 var hardBtn = document.getElementById('hardBtn');
 hardBtn.addEventListener('click',function(){
     points = 0;
@@ -144,8 +144,26 @@ easyBtn.addEventListener('click',function(){
     easyBtn.style.color = 'tomato';
     hardBtn.style.color = 'black';
 });
-function winnerModal() {
 
+
+/* --- Modal content ---- */
+var modalDiv = document.getElementById('myModal');
+
+function winnerModal() {
+    points = 0;
+    score.innerText = points;
+    player.respawn();
+    modalDiv.style.display = 'block';
+    var closeBtn = document.querySelector('.close');
+    closeBtn.addEventListener('click',closeModal);
+}
+document.addEventListener('click',function(e){
+    if (e.target == modalDiv) {
+        modalDiv.style.display = "none";
+    }
+});
+function closeModal() {  
+    modalDiv.style.display = 'none';
 }
 
 // This listens for key presses and sends the keys to your
