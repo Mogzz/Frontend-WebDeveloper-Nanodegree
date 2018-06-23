@@ -1,7 +1,5 @@
 // Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     this.speedArr = [100, 150, 200, 250];
     this.hypSpeedArr = [300,350,400];
     this.yArr = [64, 147, 230];
@@ -9,19 +7,13 @@ var Enemy = function() {
     this.height = 50;
     this.width = 50;
     this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.speed = this.speedArr[Math.floor(Math.random() * this.speedArr.length)];
     this.hyperSpeed = this.hypSpeedArr[Math.floor(Math.random() * this.hypSpeedArr.length)];
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     if(points < 50){
         this.x += this.speed*dt;
     } else {
@@ -55,9 +47,6 @@ function Player(){ //Player contructor with starting position
 }
 // This class requires an update(), render() and
 Player.prototype.update = function(key) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     if(key == 'up') {
         this.y -= 20;
 
