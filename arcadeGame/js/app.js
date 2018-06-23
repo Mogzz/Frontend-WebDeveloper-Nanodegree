@@ -4,8 +4,8 @@ var Enemy = function() {
     this.hypSpeedArr = [300,350,400];
     this.yArr = [64, 147, 230];
     this.x = 1;
-    this.height = 50;
-    this.width = 50;
+    this.height = 25;
+    this.width = 25;
     this.y = this.yArr[Math.floor(Math.random() * this.yArr.length)];
     this.sprite = 'images/enemy-bug.png';
     this.speed = this.speedArr[Math.floor(Math.random() * this.speedArr.length)];
@@ -42,8 +42,8 @@ function Player(){ //Player contructor with starting position
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
-    this.height = 101;
-    this.width = 101;
+    this.height = 75;
+    this.width = 35;
 }
 // This class requires an update(), render() and
 Player.prototype.update = function(key) {
@@ -95,8 +95,8 @@ Player.prototype.checkCollisions = function(){
         if (enemy.x < this.x + this.width && enemy.x + enemy.width > this.x && enemy.y < this.y + this.height && enemy.height + enemy.y > this.y) {
             //moves the player back to it's start position
             this.respawn();
-            if(points >= 20) {
-                points -= 20;
+            if(points >= 10) {
+                points -= 10;
                 score.innerText = points;
             } else  {
                 points = 0;
@@ -132,7 +132,11 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        65: 'left',
+        83: 'down',
+        87: 'up',
+        68: 'right'
     };
     e.preventDefault();
     player.handleInput(allowedKeys[e.keyCode]);
