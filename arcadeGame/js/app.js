@@ -14,7 +14,7 @@ var Enemy = function() {
 
 
 Enemy.prototype.update = function(dt) {
-    if(easeMode){
+    if(easyMode){
         this.x += this.speed*dt;
     } else if(hardMode) {
         this.x += this.hyperSpeed*dt;
@@ -125,9 +125,25 @@ var easyMode = true;
 
 var hardBtn = document.getElementById('hardBtn');
 hardBtn.addEventListener('click',function(){
+    points = 0;
+    score.innerText = points;
     hardMode = true;
     easyMode = false;
-})
+    player.respawn();
+    hardBtn.style.color = 'tomato';
+    easyBtn.style.color = 'black';
+});
+
+var easyBtn = document.getElementById('easyBtn');
+easyBtn.addEventListener('click',function(){
+    points = 0;
+    score.innerText = points;
+    player.respawn();
+    hardMode = false;
+    easyMode = true;
+    easyBtn.style.color = 'tomato';
+    hardBtn.style.color = 'black';
+});
 function winnerModal() {
 
 }
