@@ -29,6 +29,9 @@ A simple object oriented Frogger game built with JS
  S key - Down
  D key - Right 
 
-#Author
+#Installation
+- Clone the repo locally and run index.html to play.
+- Works in any modern browser!
 
+#Author
 Morgan Parry
