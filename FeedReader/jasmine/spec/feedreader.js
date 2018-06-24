@@ -82,7 +82,7 @@ $(function() {
         beforeEach(function(done){
             entries = document.querySelectorAll('.entry .feed');
             loadFeed(0,done);
-          
+    
         });
         /* a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -94,26 +94,27 @@ $(function() {
         });
     });
 
-
     describe('New Feed Selection',function(){
-        /*  a test that ensures when a new feed is loaded
+        /* a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
+         * Remember, loadFeed() is asynchronous.
          */
         var feedAfterFirstLoad;
         var feedAfterSecondLoad;
 
         beforeEach(function(done){
             loadFeed(0, function () {
-                feedAfterFirstLoad = document.querySelector('.feed').innerHTML();
+                feedAfterFirstLoad = $('.feed').html();
                 loadFeed(1, function () {
                     // get content of feed container again
-                    feedAfterSecondLoad = document.querySelector('.feed').innerHTML();
+                    feedAfterSecondLoad = $('.feed').html();
                     done();
                 })
              })
         });
         
             it('should change entries when loadFeed is called',function(done) {
+                
                 expect(feedAfterFirstLoad).not.toEqual(feedAfterSecondLoad);
                 done();
             });
