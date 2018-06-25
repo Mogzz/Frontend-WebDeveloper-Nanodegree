@@ -80,7 +80,7 @@ $(function() {
     describe('Initial Entries',function() {
         var entries;
         beforeEach(function(done){
-            entries = document.querySelectorAll('.entry .feed');
+            entries = document.querySelectorAll('.feed .entry');
             loadFeed(0,done);
     
         });
