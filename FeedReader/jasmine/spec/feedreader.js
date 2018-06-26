@@ -17,11 +17,11 @@ $(function() {
         function hasUrl(element) {
             it('has URL',function(){
                 expect(element.url).toBeDefined();
-                expect(element.url.length).not.toBeLessThan(1);
+                expect(element.url.length).toBeGreaterThan(0);
             })
         }
-        for (let url in allFeeds) {
-            hasUrl(allFeeds[url]);
+        for (let feed in allFeeds) {
+            hasUrl(allFeeds[feed]);
          }
 
         /* a test that loops through each feed
@@ -34,8 +34,8 @@ $(function() {
                 expect(element.name.length).not.toBeLessThan(1);
             })
         }
-        for (let name in allFeeds) {
-            hasName(allFeeds[name]);
+        for (let feed in allFeeds) {
+            hasName(allFeeds[feed]);
          }
 
     });
@@ -45,7 +45,6 @@ $(function() {
     describe('The Menu',function(){
         var body;
         var btn;
-        var spyEvent;
         beforeEach(function(){
             body = document.querySelector('body');
             btn  = document.querySelector('.menu-icon-link');
@@ -80,17 +79,19 @@ $(function() {
     describe('Initial Entries',function() {
         var entries;
         beforeEach(function(done){
-            entries = document.querySelectorAll('.feed .entry');
-            loadFeed(0,done);
+            loadFeed(0, function () {
+                entries = document.querySelectorAll('.feed .entry');
+                done();
+            });
     
         });
         /* a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          */
-        it('should contain atleast a single entry when loadFeed finishes', function(done){
-            expect(entries.length).not.toBeLessThan(0);
-            done();
+        it('should contain atleast a single entry when loadFeed finishes', function(){
+            expect(entries.length).toBeGreaterThan(0)
+       
         });
     });
 
@@ -109,14 +110,14 @@ $(function() {
                     // get content of feed container again
                     feedAfterSecondLoad = $('.feed').html();
                     done();
-                })
-             })
+                });
+             });
         });
         
-            it('should change entries when loadFeed is called',function(done) {
+            it('should change entries when loadFeed is called',function() {
                 
                 expect(feedAfterFirstLoad).not.toEqual(feedAfterSecondLoad);
-                done();
+                
             });
     
     });
